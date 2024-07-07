@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pypi-workflow"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["SpaceShaman <spaceshaman@tuta.io>"]
 readme = "README.md"
