@@ -5,4 +5,4 @@
 ![Tests](https://img.shields.io/github/actions/workflow/status/SpaceShaman/pypi-workflow/tests.yml?label=tests)
 ![Codecov](https://img.shields.io/codecov/c/github/SpaceShaman/pypi-workflow)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pypi-workflow)
-![PyPI - Version](https://img.shields.io/pypi/v/pypi-workflow)
+[![PyPI - Version](https://img.shields.io/pypi/v/pypi-workflow)](https://pypi.org/project/pypi-workflow)
