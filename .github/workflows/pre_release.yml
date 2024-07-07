@@ -1,11 +1,15 @@
-name: Coverage
-on: 
-  release:
-    types: [published]
+name: Publish to test PyPI
+on:
+  push:
+    tags:
+      - '*.*.*'
 
 jobs:
-  coverage:
+  tests:
+    uses: ./.github/workflows/tests.yml
+  release:
     runs-on: ubuntu-22.04
+    needs: tests
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
@@ -24,9 +28,9 @@ jobs:
           key: venv-${{ hashFiles('poetry.lock') }}
       - name: Install dependencies
         run: poetry install
-      - name: Run tests and collect coverage
-        run: poetry run pytest --cov --cov-report=xml
-      - name: Upload coverage raports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Configure poetry for publishing to test PyPI
+        run: |
+          poetry config repositories.testpypi https://test.pypi.org/legacy/
+          poetry config pypi-token.testpypi ${{ secrets.TEST_PYPI_TOKEN }}
+      - name: Publish package to test PyPI
+        run: poetry publish --build -r testpypi
