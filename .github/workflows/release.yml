@@ -1,11 +1,12 @@
-name: Coverage
-on: 
-  push:
-    branches:
-      - master
-
+name: Release
+on:
+  workflow_run:
+    workflows: ["Tests"]
+    types:
+      - completed
+  
 jobs:
-  coverage:
+  release:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -25,9 +26,7 @@ jobs:
           key: venv-${{ hashFiles('poetry.lock') }}
       - name: Install dependencies
         run: poetry install
-      - name: Run tests and collect coverage
-        run: poetry run pytest --cov --cov-report=xml
-      - name: Upload coverage raports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Configure poetry for publishing
+        run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
+      - name: Publish package to PyPI
+        run: poetry publish --build
