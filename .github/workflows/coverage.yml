@@ -1,11 +1,11 @@
-name: Run tests
+name: Collect coverage and upload to Codecov
 on: 
   push:
     branches:
       - master
 
 jobs:
-  tests:
+  coverage:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run tests and collect coverage
-        run: poetry run pytest --cov .
+        run: poetry run pytest --cov --cov-report=xml
       - name: Upload coverage raports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
