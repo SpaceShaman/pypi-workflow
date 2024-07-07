@@ -31,6 +31,7 @@ jobs:
       #   run: poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
       # - name: Publish package to PyPI
       #   run: poetry publish --build
+      - uses: actions/checkout@v4
       - uses: ./.github/workflows/tests.yml
         with:
           python-version: "3.12"
