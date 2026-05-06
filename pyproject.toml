@@ -12,7 +12,7 @@ repository = "https://github.com/SpaceShaman/pypi-workflow"
 python = ">=3.10.0,<4.0.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.2.2"
+pytest = ">=8.2.2,<10.0.0"
 pytest-cov = "^5.0.0"
 ruff = "^0.5.1"
 mypy = "^1.10.1"
